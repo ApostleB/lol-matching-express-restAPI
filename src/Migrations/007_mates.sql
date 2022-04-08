@@ -1,0 +1,24 @@
+USE express;
+
+#Mates테이블이 있다면 지워라
+DROP TABLE IF EXISTS Mates;
+
+CREATE TABLE IF NOT EXISTS Mates
+(
+    Id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    seekerId INT NOT NULL,
+    applicantId INT NOT NULL,
+    Content VARCHAR(512) NOT NULL,
+    CreatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UpdatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE  CURRENT_TIMESTAMP,
+
+    FOREIGN KEY(seekerId) REFERENCES Users(Id) ON DELETE CASCADE,
+    FOREIGN KEY(applicantId) REFERENCES Users(Id) ON DELETE CASCADE
+);
+
+INSERT INTO Mates(
+    seekerId, applicantId, Content, CreatedAt, UpdatedAt
+)
+VALUES (
+    1, 2, '같이 할 분 찾습니다.', '2022-03-23 00:00:00', '2022-03-23 00:00:00'
+);
