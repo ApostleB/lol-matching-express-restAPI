@@ -18,6 +18,7 @@ app.use(cors(corsOption)); // CORS 미들웨어 추가
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
+
 app.use("/login", (req, res) => {
     res.sendFile(__dirname+"/Views/login.html");
 })

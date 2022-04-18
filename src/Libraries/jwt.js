@@ -1,5 +1,6 @@
 //https://velog.io/@jguuun/NodeJWT
 //https://velog.io/@neity16/NodeJS-JWT-Token-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0
+
 import jwt from "jsonwebtoken";
 import randToken from "rand-token";
 import jwtConfig from "../Config/jwtConfig"
@@ -7,18 +8,21 @@ const TOKEN_EXPIRED = -3;
 const TOKEN_INVALID = -2;
 
 export const sign = async (user) =>{
+    //토큰 생성
     const payload = {
-        idx: user.userIdx,
+        id: user.userIdx,
         email: user.email,
     }
     const result = {
         token: jwt.sign(payload, jwtConfig.secretKey, jwtConfig.option),
         refreshToken: jwt.sign(payload, jwtConfig.refreshSecretKey, jwtConfig.refreshOption)    //DB저장 후 재발급시 대조
     };
+    console.log("토큰 생성");
     return result;
 }
 
 export const verify = async (token) => {
+    console.log("verify");
     let decoded;
     try{
         console.log("token:::",token, "end")
