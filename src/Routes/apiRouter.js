@@ -1,7 +1,7 @@
 import express from "express";
 import res from "express/lib/response";
 
-import { duoHome } from "../Controllers/duoController"
+import { duoHome, duoReg, applicantDuo } from "../Controllers/duoController"
 import { summonerInfo } from "../Controllers/summonerinfoApi";
 import { summonerLeagueInfo } from "../Controllers/leagueInfoApi";
 import { gameInfo } from "../Controllers/gameInfoApi";
@@ -16,17 +16,14 @@ apiRouter.post('/login', login );
 
 //duo
 apiRouter.get("/duo/rescue", duoHome);
+apiRouter.post("/duo/reg", duoReg);
+// apiRouter.post("/duo/applicant", applicantDuo);
 
 //클랜
 
 //커뮤니티
 
 //
-
-
-
-
-
 
 
 // apiRouter.get("/summoner/gameList/:gameInfo", gameInfo);
