@@ -17,6 +17,7 @@
     "express-session": "^1.17.2",
     "http": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
+    "mariadb": "^3.0.0",
     "rand-token": "^1.0.1"
   },
   "devDependencies": {
@@ -25,5 +26,6 @@
     "@babel/node": "^7.16.8",
     "@babel/preset-env": "^7.16.10",
     "nodemon": "^2.0.15"
-  }
+  },
+  "proxy": "http://localhost:4000"
 }

@@ -1,4 +1,4 @@
-#source /home/project/src/Migrations/006_users_procedure.sql;
+#source C:/MyApp/project/src/Migrations/006_users_procedure.sql;
 
 DROP PROCEDURE IF EXISTS User_Login;
 DELIMITER $$
@@ -8,11 +8,20 @@ CREATE PROCEDURE User_Login(
 )
 BEGIN
     DECLARE DUserId INT DEFAULT NULL;
+    DECLARE DEmail VARCHAR(128) DEFAULT NULL;
+    DECLARE DName VARCHAR(64) DEFAULT NULL;
+    DECLARE DLOLName VARCHAR(64) DEFAULT NULL;
 
-    SELECT Id, Email, Name 
+    SELECT Id, Email, Name, LOLName
+    INTO DUserId, DEmail, DName, DLOLName
     FROM Users
     WHERE Email=PEmail AND Password=PPassword;
 
+    IF DUserId IS NULL THEN
+        SIGNAL SQLSTATE 'FB001' SET MYSQL_ERRNO=10000, MESSAGE_TEXT = '계정정보를 확인해 주세요.';
+    ELSE
+        SELECT DUserId AS Id, DEmail AS Email, DName AS Name, DLOLName AS LOLName;
+    END IF;
 END $$
 DELIMITER ;
 
