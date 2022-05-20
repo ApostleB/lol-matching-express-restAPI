@@ -1,22 +1,25 @@
 import express from "express";
 import res from "express/lib/response";
 
-import { duoHome, duoReg, applicantDuo } from "../Controllers/duoController"
+import { duoHome, duoReg, applicantDuo, deleteMate, test } from "../Controllers/duoController"
 import { summonerInfo } from "../Controllers/summonerinfoApi";
 import { summonerLeagueInfo } from "../Controllers/leagueInfoApi";
 import { gameInfo } from "../Controllers/gameInfoApi";
 import { login } from "../Controllers/userController"
 import { checkName } from "../Controllers/nickController"
+import { naverLogin } from "../Controllers/oauthController"
 
 import { authUser } from "../middleware";
 const apiRouter = express();
-
+apiRouter.get('/test', test );
 //auth
 apiRouter.post('/login', login );
-
+apiRouter.post('/login/naver', naverLogin );
 //duo
 apiRouter.get("/duo/rescue", duoHome);
 apiRouter.post("/duo/reg", duoReg);
+apiRouter.get("/duo/delete", deleteMate);
+
 // apiRouter.post("/duo/applicant", applicantDuo);
 
 //클랜

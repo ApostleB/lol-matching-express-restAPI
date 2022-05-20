@@ -33,3 +33,4 @@ export const login = async (req, res) => {
         return res.status(400).json({message:"잠시후 다시 시도해주세요."});
     }
 }
+

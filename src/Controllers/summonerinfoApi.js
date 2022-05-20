@@ -2,7 +2,6 @@
 import { API_KEY } from '../Commons/API_KEY';
 const axios = require('axios');
 
-
 export const summonerInfo = async (req , res) => {
   console.log("summerInfroAPI1");
    const name = encodeURI(req.params.summonerName);
