@@ -3,10 +3,23 @@ import jwt from "jsonwebtoken";
 import bodyParser from "body-parser";
 import cors from "cors";
 import apiRouter from "./Routes/apiRouter";
-
 import express from "express";
 
+import session from "express-session";
+import MySQLStore from "express-mysql-session";
+import sessionConfig from "./Config/sessionConfig.json"
+import { sessionOptions } from './Libraries/sessionOptions';
+
 const app = express();
+
+app.use(session({
+    name:"FitboaAPI",
+    secret:sessionConfig.COOKIE_SECRET,
+    key: sessionConfig.SESSION_KEY,
+    saveUninitialized:false,
+    resave:false,
+    store: new MySQLStore(sessionOptions)
+}));
 
 let corsOption = {
     origin: 'http://localhost:3000', // 허락하는 요청 주소

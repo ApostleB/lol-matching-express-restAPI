@@ -1,17 +1,21 @@
 import express from "express";
-import res from "express/lib/response";
+import { authUser } from "../middleware";
 
 import { duoHome, duoReg, applicantDuo, deleteMate, test } from "../Controllers/duoController"
 import { summonerInfo } from "../Controllers/summonerinfoApi";
 import { summonerLeagueInfo } from "../Controllers/leagueInfoApi";
 import { gameInfo } from "../Controllers/gameInfoApi";
-import { login } from "../Controllers/userController"
+import { login, userInfo, userInfoTest } from "../Controllers/userController"
 import { checkName } from "../Controllers/nickController"
 import { naverLogin } from "../Controllers/oauthController"
 
-import { authUser } from "../middleware";
 const apiRouter = express();
-apiRouter.get('/test', test );
+apiRouter.use((req, res, next) => {
+  req.body.email = "test"
+  req.body.password = "123"
+  next();
+})
+apiRouter.get('/test',login );
 //auth
 apiRouter.post('/login', login );
 apiRouter.post('/login/naver', naverLogin );
